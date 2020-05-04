@@ -1,5 +1,7 @@
-FROM ubuntu:artful
+FROM ubuntu:focal
+
 MAINTAINER Soeren Kress <soeren@boundless-mind.com>
+ENV DATE=2020-05-04_08:00
 
 # USING THIS CONTAINER
 # docker run \
@@ -9,7 +11,12 @@ MAINTAINER Soeren Kress <soeren@boundless-mind.com>
 #   -v /var/lib/libvirt:/var/lib/libvirt:rw skress/virt-install /bin/bash
 #
 
-RUN apt-get update && apt-get install -y vim openssh-client less cpio virtinst libvirt-clients libvirt-bin libosinfo-bin && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends apt-utils dialog 2>&1 \
+    && apt-get install -y vim openssh-client less cpio virtinst libvirt-clients libosinfo-bin \
+    && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog
 
 WORKDIR /root
 CMD ["bash"]
