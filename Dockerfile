@@ -1,7 +1,7 @@
 FROM ubuntu:focal
 
 MAINTAINER Soeren Kress <soeren@boundless-mind.com>
-ENV DATE=2020-05-18_08:00
+ENV DATE=2020-05-18_17:00
 
 # USING THIS CONTAINER
 # docker run \
@@ -14,7 +14,7 @@ ENV DATE=2020-05-18_08:00
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y --no-install-recommends apt-utils dialog 2>&1 \
-    && apt-get install -y vim openssh-client less cpio virtinst libvirt-clients libosinfo-bin libguestfs-tools \
+    && apt-get install -y vim openssh-client less cpio virtinst libvirt-clients libosinfo-bin dosfstools \
     && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
 
